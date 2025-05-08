@@ -171,23 +171,33 @@
 
       let portfolioFilters = select('#portfolio-flters li', true);
 
-      on('click', '#portfolio-flters li', function(e) {
-        e.preventDefault();
-        portfolioFilters.forEach(function(el) {
-          el.classList.remove('filter-active');
+      // ✅ Sayfa yüklenince bir filtreyi aktif hale getir
+      let defaultFilter = document.querySelector('#portfolio-flters li[data-filter=".filter-unitygames"]');
+      if (defaultFilter) {
+        portfolioFilters.forEach(el => el.classList.remove('filter-active'));
+        defaultFilter.classList.add('filter-active');
+        portfolioIsotope.arrange({
+          filter: defaultFilter.getAttribute('data-filter')
         });
+      }
+
+      // Filtreye tıklanma olayı
+      on('click', '#portfolio-flters li', function (e) {
+        e.preventDefault();
+        portfolioFilters.forEach(el => el.classList.remove('filter-active'));
         this.classList.add('filter-active');
 
         portfolioIsotope.arrange({
           filter: this.getAttribute('data-filter')
         });
-        portfolioIsotope.on('arrangeComplete', function() {
-          AOS.refresh()
+
+        portfolioIsotope.on('arrangeComplete', function () {
+          AOS.refresh();
         });
       }, true);
     }
-
   });
+
 
   /**
    * Initiate portfolio lightbox 

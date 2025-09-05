@@ -561,6 +561,14 @@ section {
   z-index: 1;
 }
 
+.portfolio-wrap img {
+  display: block;
+  margin: 0 auto;        /* ortalama */
+  width: auto;           /* img-fluid’in 100% genişliğini iptal et */
+  max-width: 100%;       /* yine de taşmasın */
+  height: auto;
+}
+
 .portfolio .portfolio-wrap::before {
   content: "";
   background: rgba(255, 255, 255, 0.5);
